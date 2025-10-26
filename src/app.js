@@ -2,11 +2,11 @@ const express = require("express");
 
 const app = express()
 
-app.use("/home",(req,res)=>{
+app.get("/user",(req,res)=>{
     res.send("hiiii from dashbord");
 });
 
-app.use("/hello",(req,res)=>{
+app.post("/user",(req,res)=>{
     res.send("hiiii from suvarna");
 });
 
