@@ -2,33 +2,31 @@ const express = require("express");
 
 const app = express()
 
-app.get("/user",(req,res,next)=>{
+app.get("/admin",(req,res,next)=>{
+    const token = "xysvgh";
+    const isAdminAuthorized = token ==="xyz";
+    if(!isAdminAuthorized){
+     res.status(401).send("unauthorized data");
+    }else{
+        next();  }
+});
+app.get("/admin/getAllData",(req,res)=>{
+    const token = "xysvgh";
+    const isAdminAuthorized = token ==="xyz";
+    if(isAdminAuthorized){
+        res.send("all data send")
+    }else{
+     res.status(401).send("unauthorized data");
+    }
     
-    res.send("Route Handler-1");
+   
+});
+
+app.get("/admin/deleteUser",(req,res)=>{
+    
+    res.send("Deleted a user");
    next()
-},
-
-(req,res,next)=>{
-    res.send("Route Handler2");
-    next()
-},
-(req,res,next)=>{
-
-    res.send("Route Handler-3");
-    next()
-   
-},
-
-(req,res,next)=>{
-    
-    res.send("Route Handler-4");
-    next()
-   
-}
-
-);
-
-
+});
 
 app.listen(7777,()=>{
     console.log("server is sucessfully listening port 7777");
