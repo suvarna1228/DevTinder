@@ -3,14 +3,30 @@ const express = require("express");
 const app = express()
 
 app.get("/user",(req,res,next)=>{
-     next()
+    
     res.send("Route Handler-1");
+   next()
+},
+
+(req,res,next)=>{
+    res.send("Route Handler2");
+    next()
+},
+(req,res,next)=>{
+
+    res.send("Route Handler-3");
+    next()
    
 },
 
-(req,res)=>{
-    res.send("Route Handler2");
-});
+(req,res,next)=>{
+    
+    res.send("Route Handler-4");
+    next()
+   
+}
+
+);
 
 
 
