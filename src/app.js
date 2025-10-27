@@ -2,17 +2,16 @@ const express = require("express");
 
 const app = express()
 
-app.get("/user",(req,res)=>{
-    res.send("hiiii from dashbord");
+app.get("/user",(req,res,next)=>{
+     next()
+    res.send("Route Handler-1");
+   
+},
+
+(req,res)=>{
+    res.send("Route Handler2");
 });
 
-app.post("/user",(req,res)=>{
-    res.send("hiiii from suvarna");
-});
-
-app.use("/test",(req,res)=>{
-    res.send("hiiii from nethul");
-});
 
 
 app.listen(7777,()=>{
