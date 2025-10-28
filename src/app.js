@@ -3,17 +3,20 @@ const connectDB = require("./config/database");
 const app = express()
 const User= require("./models/user");
 
-
+app.use(express.json());
 app.post("/signup",async(req,res)=>{
-    const user =new User({
-        firstName: "suvarna",
-        lastName:"s",
-        enailId:"suvarna@gmail.com",
-        password:"1234567"
-    }) ;
+    const user =new User(req.body
+        // firstName: "suvarna",
+        // lastName:"s",
+        // enailId:"suvarna@gmail.com",
+        // password:"1234567"
+    ) ;
 
-    await user.save();
+    try{await user.save();
     res.send("user Added sucessfully")
+    }catch(err){
+        res.status(400).send("error saving data"+err.message)
+    }
 });
 
 
