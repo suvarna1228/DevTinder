@@ -1,27 +1,27 @@
 const express = require("express");
-
+const connectDB = require("./config/database");
 const app = express()
+const User= require("./models/user");
 
-app.get("/admin",(req,res,next)=>{
-    console.log("admin auth is getting cheaked!")
-    const token = "xyz";
-    const isAdminAuthorized = token ==="xyz";
-    if(!isAdminAuthorized){
-     res.status(401).send("unauthorized data");
-    }else{
-        next();  }
-});
-app.get("/admin/getAllData",(req,res)=>{
-   
-        res.send("all data send")  
-});
 
-app.get("/admin/deleteUser",(req,res)=>{
-    
-    res.send("Deleted a user");
-   
+app.post("/signup",async(req,res)=>{
+    const user =new User({
+        firstName: "suvarna",
+        lastName:"s",
+        enailId:"suvarna@gmail.com",
+        password:"1234567"
+    }) ;
+
+    await user.save();
+    res.send("user Added sucessfully")
 });
 
-app.listen(7777,()=>{
+
+connectDB().then(()  => {
+    console.log("Database Connected Sucessfully");
+    app.listen(7777,()=>{
     console.log("server is sucessfully listening port 7777");
 });
+}).catch(err=>{
+    console.error("Database canot be  Connected ");
+})
